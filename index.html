@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evolutiva — Programa Extracurricular de Inteligencia Artificial</title>
+  <meta name="description" content="Programa intensivo de 12 semanas donde los estudiantes construirán un proyecto real desde cero utilizando Inteligencia Artificial." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50:  '#eef4ff',
+              100: '#dae6ff',
+              200: '#bdd4ff',
+              300: '#90baff',
+              400: '#5b94ff',
+              500: '#3b6ef8',
+              600: '#2250ed',
+              700: '#1a3dda',
+              800: '#1c34b0',
+              900: '#1c318b',
+              950: '#0B1120',
+            },
+            gold: {
+              400: '#FBBF24',
+              500: '#D4A843',
+              600: '#B8922E',
+            },
+            surface: {
+              50:  '#FAFBFE',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+            }
+          },
+        },
+      },
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer base {
+      body {
+        @apply font-sans text-slate-800 antialiased;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      h1, h2, h3 {
+        @apply text-brand-950;
+      }
+    }
+
+    @layer utilities {
+      .text-balance {
+        text-wrap: balance;
+      }
+    }
+
+    @layer components {
+      .section-padding {
+        @apply px-6 py-20 md:py-28 lg:px-8;
+      }
+      .container-narrow {
+        @apply mx-auto max-w-6xl;
+      }
+      .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-700 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-brand-700/25 transition-all duration-300 hover:bg-brand-800 hover:shadow-xl hover:shadow-brand-700/30 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+      }
+      .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-brand-700 px-6 py-3 text-sm font-semibold text-brand-700 transition-all duration-300 hover:bg-brand-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+      }
+      .card-elevated {
+        @apply rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1;
+      }
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .gradient-text {
+        @apply bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 bg-clip-text text-transparent;
+      }
+    }
+
+    /* Subtle background pattern */
+    .hero-pattern {
+      background-image: radial-gradient(circle at 25% 0%, rgba(34, 80, 237, 0.06) 0%, transparent 50%),
+                         radial-gradient(circle at 75% 100%, rgba(212, 168, 67, 0.05) 0%, transparent 50%);
+    }
+    .mesh-gradient {
+      background-image: radial-gradient(at 40% 20%, rgba(34, 80, 237, 0.04) 0px, transparent 50%),
+                         radial-gradient(at 80% 80%, rgba(212, 168, 67, 0.03) 0px, transparent 50%);
+    }
+
+    /* Timeline connector */
+    .timeline-line {
+      position: relative;
+    }
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      left: 1.25rem;
+      top: 3rem;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #2250ed, #bdd4ff);
+    }
+    .timeline-line:last-child::before {
+      display: none;
+    }
+
+    /* FAQ animation */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
+    }
+    .faq-answer.open {
+      max-height: 300px;
+    }
+
+    /* Smooth header transition */
+    .header-scrolled {
+      @apply bg-white/95 shadow-md backdrop-blur-md;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    /* Subtle shine animation for CTA */
+    @keyframes subtle-shine {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .cta-shine {
+      background-size: 200% auto;
+      background-image: linear-gradient(90deg, #1a3dda 0%, #2250ed 25%, #3b6ef8 50%, #2250ed 75%, #1a3dda 100%);
+      animation: subtle-shine 4s linear infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 1: HEADER                               -->
+  <!-- ============================================== -->
+  <header id="main-header" class="fixed top-0 z-50 w-full transition-all duration-500">
+    <div class="container-narrow mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
+      <!-- Logos -->
+      <div class="flex items-center gap-4">
+        <!-- Logo Evolutiva (placeholder SVG) -->
+        <div class="flex items-center gap-2">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-700">
+            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-brand-950">Evolutiva</span>
+        </div>
+        <!-- Separator -->
+        <div class="hidden h-8 w-px bg-slate-300 sm:block"></div>
+        <!-- Logo Colegio Aliado (placeholder) -->
+        <div class="hidden items-center gap-2 sm:flex">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-slate-300 bg-surface-50">
+            <svg class="h-5 w-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
+            </svg>
+          </div>
+          <span class="text-sm font-medium text-slate-600">Colegio Aliado</span>
+        </div>
+      </div>
+      <!-- CTA -->
+      <a href="#fechas" class="btn-secondary text-xs sm:text-sm">
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+        </svg>
+        Ver Fechas de Inicio
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 2: HERO SECTION                          -->
+  <!-- ============================================== -->
+  <section class="hero-pattern relative flex min-h-screen items-center overflow-hidden pt-20">
+    <!-- Decorative elements -->
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-brand-100/40 blur-3xl"></div>
+      <div class="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-gold-400/10 blur-3xl"></div>
+      <!-- Subtle grid -->
+      <div class="absolute inset-0 opacity-[0.02]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M60 0H0v60&quot; fill=&quot;none&quot; stroke=&quot;%23000&quot; stroke-width=&quot;1&quot;/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+    </div>
+
+    <div class="container-narrow relative mx-auto px-6 py-16 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <!-- Badge -->
+        <div class="fade-up mb-8 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-5 py-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-600"></span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-brand-700">Programa Extracurricular Oficial &bull; 12 Semanas</span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="fade-up text-balance font-display text-4xl font-bold leading-tight tracking-tight text-brand-950 sm:text-5xl md:text-6xl">
+          Dale a tu hijo la ventaja tecnológica que definirá
+          <span class="gradient-text">la próxima década.</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="fade-up mt-8 text-balance text-lg leading-relaxed text-slate-600 sm:text-xl">
+          Un programa intensivo y 100% práctico donde los estudiantes de
+          <strong class="font-semibold text-brand-950">[Nombre del Colegio]</strong>
+          construirán un proyecto real desde cero utilizando Inteligencia Artificial, guiados 24/7 por un Tutor Virtual en su celular.
+        </p>
+
+        <!-- CTA -->
+        <div class="fade-up mt-12 flex flex-col items-center gap-4">
+          <a href="#inscripcion" class="btn-primary cta-shine text-lg">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+            Inscribir a mi hijo
+          </a>
+          <span class="text-sm font-medium text-slate-500">
+            Cierre de matrículas: <strong class="text-brand-700">[Fecha de Cierre]</strong>
+          </span>
+        </div>
+
+        <!-- Trust indicators -->
+        <div class="fade-up mt-16 flex flex-wrap items-center justify-center gap-8 border-t border-slate-200/60 pt-10 text-sm text-slate-500">
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+            </svg>
+            <span>Entorno 100% Seguro</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
+            </svg>
+            <span>Avalado por tu Colegio</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
+            <span>Tutor IA 24/7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="h-6 w-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 3: EL PROBLEMA                           -->
+  <!-- ============================================== -->
+  <section class="section-padding bg-brand-950 text-white">
+    <div class="container-narrow mx-auto">
+      <div class="mx-auto max-w-3xl">
+        <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
+          <svg class="h-4 w-4 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">El Problema Real</span>
+        </div>
+
+        <h2 class="fade-up font-display text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+          Hoy, la mayoría de los jóvenes usan la tecnología
+          <span class="text-gold-400">para evitar pensar.</span>
+        </h2>
+
+        <p class="fade-up mt-8 text-lg leading-relaxed text-slate-300 sm:text-xl">
+          Entran a herramientas como ChatGPT, copian, pegan y entregan. El problema es que las universidades y las empresas del 2030
+          <strong class="font-semibold text-white">no contratarán a quienes dependan de la IA para hacer lo básico.</strong>
+          Contratarán a los pocos que sepan dirigir esta tecnología para resolver problemas complejos en minutos.
+        </p>
+
+        <div class="fade-up mt-10 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <p class="text-lg font-medium leading-relaxed text-white">
+            Esa es la diferencia entre ser <span class="text-slate-400 line-through">reemplazable</span>
+            o ser <span class="font-bold text-gold-400">indispensable.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 4: LA SOLUCIÓN Y METODOLOGÍA             -->
+  <!-- ============================================== -->
+  <section class="section-padding mesh-gradient bg-surface-50">
+    <div class="container-narrow mx-auto">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5">
+          <span class="text-xs font-semibold uppercase tracking-widest text-brand-700">Nuestra Metodología</span>
+        </div>
+
+        <h2 class="fade-up font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          Aprendizaje Basado en la Creación<br />
+          <span class="gradient-text">(Cero Teoría Aburrida)</span>
+        </h2>
+
+        <p class="fade-up mt-6 text-lg leading-relaxed text-slate-600">
+          Durante 12 semanas, su hijo no va a memorizar conceptos. Va a construir un proyecto funcional
+          &mdash;un negocio, una aplicación o una solución a un problema real de su entorno&mdash;
+          utilizando herramientas de Inteligencia Artificial a nivel profesional.
+        </p>
+      </div>
+
+      <!-- 3-Column Cards -->
+      <div class="mt-16 grid gap-8 md:grid-cols-3">
+        <!-- Card 1: Masterclasses -->
+        <div class="card-elevated fade-up text-center">
+          <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50">
+            <svg class="h-7 w-7 text-brand-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
+          <h3 class="mb-3 text-xl font-bold">Masterclasses en Vivo</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            12 sesiones semanales dirigidas por Sebastián, CEO de Evolutiva, enseñando frameworks reales de estructuración de ideas y pensamiento crítico con IA.
+          </p>
+        </div>
+
+        <!-- Card 2: Tutor IA -->
+        <div class="card-elevated fade-up text-center" style="transition-delay: 0.1s;">
+          <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50">
+            <svg class="h-7 w-7 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+            </svg>
+          </div>
+          <h3 class="mb-3 text-xl font-bold">Tutor IA 24/7 en su Celular</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            Su hijo tendrá en WhatsApp al Avatar IA del CEO. Este tutor NO hace la tarea; utiliza el método socrático (preguntas guiadas) para obligarlo a pensar y avanzar en su proyecto sin alucinaciones.
+          </p>
+        </div>
+
+        <!-- Card 3: Certificación -->
+        <div class="card-elevated fade-up text-center" style="transition-delay: 0.2s;">
+          <div class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50">
+            <svg class="h-7 w-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
+            </svg>
+          </div>
+          <h3 class="mb-3 text-xl font-bold">Proyecto Real y Certificación</h3>
+          <p class="text-sm leading-relaxed text-slate-600">
+            Al finalizar, el estudiante se gradúa con un portafolio tecnológico funcional y un certificado que demuestra habilidades que la mayoría de los adultos aún no dominan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 5: DIFERENCIADOR PARA PADRES             -->
+  <!-- ============================================== -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow mx-auto">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <!-- Left: Content -->
+        <div>
+          <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5">
+            <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            <span class="text-xs font-semibold uppercase tracking-widest text-emerald-700">Para Padres</span>
+          </div>
+
+          <h2 class="fade-up font-display text-3xl font-bold leading-tight sm:text-4xl">
+            Transparencia Total: Sepa siempre cómo avanza su hijo,
+            <span class="text-emerald-600">desde su propio WhatsApp.</span>
+          </h2>
+
+          <p class="fade-up mt-6 text-lg leading-relaxed text-slate-600">
+            ¿Cansado de pagar cursos y no saber si su hijo realmente está aprendiendo? Con Evolutiva, usted tiene
+            <strong class="font-semibold text-brand-950">visibilidad total.</strong>
+          </p>
+
+          <p class="fade-up mt-4 text-lg leading-relaxed text-slate-600">
+            En cualquier momento, puede abrir su WhatsApp y preguntarle directamente al Tutor IA de su hijo:
+            <em>"¿Cómo le fue hoy?"</em> o <em>"¿En qué fase de su proyecto va?"</em>.
+            El sistema le dará un <strong class="font-semibold text-brand-950">reporte pedagógico instantáneo</strong>,
+            claro y en tiempo real. Sin intermediarios.
+          </p>
+        </div>
+
+        <!-- Right: WhatsApp Mockup -->
+        <div class="fade-up flex justify-center">
+          <div class="w-full max-w-sm">
+            <!-- Phone frame -->
+            <div class="rounded-3xl border border-slate-200 bg-slate-100 p-2 shadow-2xl shadow-slate-200/60">
+              <!-- Status bar -->
+              <div class="rounded-t-2xl bg-emerald-700 px-4 py-3">
+                <div class="flex items-center gap-3">
+                  <svg class="h-5 w-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                  </svg>
+                  <div class="h-8 w-8 rounded-full bg-emerald-600 flex items-center justify-center">
+                    <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-white">Tutor IA de Santiago</p>
+                    <p class="text-xs text-emerald-200">en línea</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Chat body -->
+              <div class="space-y-3 bg-[#ECE5DD] p-4" style="min-height: 280px; background-image: url('data:image/svg+xml,%3Csvg width=&quot;200&quot; height=&quot;200&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cdefs%3E%3Cpattern id=&quot;p&quot; width=&quot;40&quot; height=&quot;40&quot; patternUnits=&quot;userSpaceOnUse&quot;%3E%3Ccircle cx=&quot;20&quot; cy=&quot;20&quot; r=&quot;1&quot; fill=&quot;%23d5cec3&quot; opacity=&quot;0.3&quot;/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;url(%23p)&quot;/%3E%3C/svg%3E');">
+                <!-- Parent message -->
+                <div class="flex justify-end">
+                  <div class="max-w-[75%] rounded-lg rounded-tr-none bg-[#DCF8C6] px-3 py-2 shadow-sm">
+                    <p class="text-sm text-slate-800">¿Cómo le fue a Santiago hoy en el programa?</p>
+                    <p class="mt-1 text-right text-[10px] text-slate-500">7:42 PM</p>
+                  </div>
+                </div>
+                <!-- AI response -->
+                <div class="flex justify-start">
+                  <div class="max-w-[80%] rounded-lg rounded-tl-none bg-white px-3 py-2 shadow-sm">
+                    <p class="text-sm text-slate-800">
+                      ¡Hola! Santiago tuvo un gran avance hoy. Completó la <strong>Fase 3</strong> de su proyecto: una app para organizar tareas con IA.
+                    </p>
+                    <p class="mt-2 text-sm text-slate-800">
+                      Resolvió el diseño del flujo de usuario <strong>sin ayuda directa</strong> y formuló 4 prompts avanzados. Su progreso general es del <strong>68%</strong>.
+                    </p>
+                    <p class="mt-1 text-right text-[10px] text-slate-500">7:42 PM</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Input bar -->
+              <div class="flex items-center gap-2 rounded-b-2xl bg-[#F0F0F0] px-3 py-2">
+                <div class="flex-1 rounded-full bg-white px-4 py-2">
+                  <p class="text-xs text-slate-400">Escribe un mensaje...</p>
+                </div>
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600">
+                  <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 6: EL PENSUM (Timeline)                  -->
+  <!-- ============================================== -->
+  <section class="section-padding bg-surface-50">
+    <div class="container-narrow mx-auto">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5">
+          <span class="text-xs font-semibold uppercase tracking-widest text-brand-700">Hoja de Ruta</span>
+        </div>
+        <h2 class="fade-up font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          ¿Qué lograrán en <span class="gradient-text">12 Semanas</span>?
+        </h2>
+      </div>
+
+      <!-- Timeline -->
+      <div class="mx-auto mt-16 max-w-2xl space-y-0">
+        <!-- Phase 1 -->
+        <div class="timeline-line fade-up relative pb-12 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">
+            1
+          </div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-600">Semanas 1–3</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Fundamentos y Prompts Avanzados</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Dejar de tratar a la IA como un buscador. Fundamentos y Prompts Avanzados para resultados profesionales.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="timeline-line fade-up relative pb-12 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">
+            2
+          </div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-600">Semanas 4–6</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">De la Idea al Plan Estructurado</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Usar IA para analizar, validar y diseñar la estructura de su proyecto real.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="timeline-line fade-up relative pb-12 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">
+            3
+          </div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-600">Semanas 7–9</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Creación Acelerada</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Generación de código, contenido, análisis y automatización para darle vida al proyecto.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="fade-up relative pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-white shadow-lg shadow-gold-500/30">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+            </svg>
+          </div>
+          <div class="rounded-xl border-2 border-gold-500/30 bg-amber-50/50 p-6 shadow-sm">
+            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-gold-600">Semanas 10–12</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Auditoría y Presentación Final</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Cómo detectar errores de la IA (alucinaciones), uso ético de la tecnología y presentación final del proyecto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 7: LA OFERTA                             -->
+  <!-- ============================================== -->
+  <section class="section-padding bg-white">
+    <div class="container-narrow mx-auto">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5">
+          <span class="text-xs font-semibold uppercase tracking-widest text-brand-700">Inversión</span>
+        </div>
+
+        <h2 class="fade-up font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          Una habilidad para toda la vida, por menos de lo que cuesta
+          <span class="gradient-text">una salida a cine.</span>
+        </h2>
+
+        <p class="fade-up mt-6 text-lg leading-relaxed text-slate-600">
+          Un bootcamp de tecnología de este nivel, sumado a un tutor de IA privado 24/7 y reportes en tiempo real para padres,
+          suele costar cientos de dólares mensuales. Gracias a nuestra alianza con
+          <strong class="font-semibold text-brand-950">[Nombre del Colegio]</strong>,
+          el programa completo de 12 semanas tiene un valor único:
+        </p>
+
+        <!-- Price Card -->
+        <div class="fade-up mx-auto mt-10 max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50">
+          <div class="bg-brand-950 px-8 py-6 text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-brand-300">Programa Completo · 12 Semanas</p>
+          </div>
+          <div class="px-8 py-10">
+            <div class="flex items-baseline justify-center gap-1">
+              <span class="text-2xl font-medium text-slate-500">$</span>
+              <span class="text-6xl font-extrabold tracking-tight text-brand-950">370.000</span>
+              <span class="ml-1 text-lg font-medium text-slate-500">COP</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-500">por estudiante</p>
+
+            <div class="mt-6 rounded-xl bg-brand-50 p-4">
+              <p class="text-sm font-semibold text-brand-800">
+                Equivale a menos de <span class="text-brand-700">$31.000 COP</span> semanales
+              </p>
+              <p class="mt-1 text-xs text-brand-600">
+                Una inversión mínima comparada con la ventaja competitiva absoluta que su hijo obtendrá.
+              </p>
+            </div>
+
+            <!-- Features list -->
+            <div class="mt-8 space-y-3 text-left">
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span class="text-sm text-slate-700">12 Masterclasses en vivo</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span class="text-sm text-slate-700">Tutor IA 24/7 en WhatsApp</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span class="text-sm text-slate-700">Reportes para padres en tiempo real</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span class="text-sm text-slate-700">Proyecto real + Certificado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 8: URGENCIA                              -->
+  <!-- ============================================== -->
+  <section id="fechas" class="section-padding relative overflow-hidden bg-brand-950 text-white">
+    <!-- Decorative -->
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -left-40 top-0 h-80 w-80 rounded-full bg-brand-800/30 blur-3xl"></div>
+      <div class="absolute -right-20 bottom-0 h-60 w-60 rounded-full bg-gold-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="container-narrow relative mx-auto">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5">
+          <svg class="h-4 w-4 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+          <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Fechas Importantes</span>
+        </div>
+
+        <h2 class="fade-up font-display text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+          Las clases comienzan el <span class="text-gold-400">[Fecha de Inicio]</span>.
+        </h2>
+
+        <p class="fade-up mt-6 text-lg leading-relaxed text-slate-300">
+          Este programa requiere configurar un entorno seguro y un Avatar de Inteligencia Artificial personalizado en el WhatsApp de cada estudiante antes de la primera clase.
+          <strong class="font-semibold text-white">Por logística técnica, no aceptamos inscripciones tardías bajo ninguna circunstancia.</strong>
+        </p>
+
+        <!-- Date highlight -->
+        <div class="fade-up mt-10 inline-flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 px-10 py-8 backdrop-blur-sm">
+          <p class="text-sm font-medium uppercase tracking-widest text-slate-400">Cierre definitivo de matrículas</p>
+          <p class="mt-2 font-display text-2xl font-bold text-gold-400 sm:text-3xl">[Fecha Límite]</p>
+          <p class="mt-1 text-sm text-slate-400">a las 11:59 PM</p>
+          <p class="mt-1 text-xs text-slate-500">Exclusivo para estudiantes de [Nombre del Colegio]</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="fade-up mt-12" id="inscripcion">
+          <a href="#" class="btn-primary cta-shine text-lg">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+            </svg>
+            Asegurar el cupo de mi hijo ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BLOQUE 9: FAQ                                   -->
+  <!-- ============================================== -->
+  <section class="section-padding bg-surface-50">
+    <div class="container-narrow mx-auto">
+      <div class="mx-auto max-w-3xl">
+        <div class="text-center">
+          <div class="fade-up mb-4 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5">
+            <span class="text-xs font-semibold uppercase tracking-widest text-brand-700">Preguntas Frecuentes</span>
+          </div>
+          <h2 class="fade-up font-display text-3xl font-bold leading-tight sm:text-4xl">
+            Resolvemos sus dudas
+          </h2>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="mt-12 space-y-4">
+          <!-- FAQ 1 -->
+          <div class="fade-up rounded-xl border border-slate-200 bg-white shadow-sm">
+            <button class="faq-toggle flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-slate-50" aria-expanded="false">
+              <span class="pr-4 text-base font-semibold text-brand-950">¿Mi hijo necesita conocimientos previos de programación?</span>
+              <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div class="faq-answer px-6">
+              <p class="pb-5 text-sm leading-relaxed text-slate-600">
+                Cero. Le enseñaremos a programar y dirigir a la IA usando lenguaje natural (español).
+                Solo necesita su celular o computador, WhatsApp y ganas de aprender.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="fade-up rounded-xl border border-slate-200 bg-white shadow-sm" style="transition-delay: 0.05s;">
+            <button class="faq-toggle flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-slate-50" aria-expanded="false">
+              <span class="pr-4 text-base font-semibold text-brand-950">¿Es seguro que mi hijo interactúe con una IA por WhatsApp?</span>
+              <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div class="faq-answer px-6">
+              <p class="pb-5 text-sm leading-relaxed text-slate-600">
+                100% seguro. Nuestro sistema está diseñado exclusivamente para educación. Bloquea contenido inapropiado,
+                evita alucinaciones (respuestas falsas) y alerta a nuestro equipo humano ante cualquier anomalía emocional o académica.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="fade-up rounded-xl border border-slate-200 bg-white shadow-sm" style="transition-delay: 0.1s;">
+            <button class="faq-toggle flex w-full items-center justify-between px-6 py-5 text-left transition-colors hover:bg-slate-50" aria-expanded="false">
+              <span class="pr-4 text-base font-semibold text-brand-950">¿Qué pasa si mi hijo falta a una masterclass en vivo?</span>
+              <svg class="faq-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+            <div class="faq-answer px-6">
+              <p class="pb-5 text-sm leading-relaxed text-slate-600">
+                Todas las sesiones quedan grabadas. Además, su Tutor IA le hará un resumen interactivo directamente en su WhatsApp
+                para asegurarse de que entienda los conceptos y no se atrase en su proyecto.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- FOOTER                                          -->
+  <!-- ============================================== -->
+  <footer class="border-t border-slate-200 bg-white px-6 py-12 lg:px-8">
+    <div class="container-narrow mx-auto flex flex-col items-center justify-between gap-6 sm:flex-row">
+      <div class="flex items-center gap-2">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-700">
+          <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span class="text-base font-bold text-brand-950">Evolutiva</span>
+      </div>
+      <p class="text-sm text-slate-500">&copy; 2026 Evolutiva. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- JAVASCRIPT                                      -->
+  <!-- ============================================== -->
+  <script>
+    // ── Header scroll effect ──
+    const header = document.getElementById('main-header');
+    let lastScroll = 0;
+
+    function updateHeader() {
+      const scrollY = window.scrollY;
+      if (scrollY > 60) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+      lastScroll = scrollY;
+    }
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+
+    // ── Scroll Reveal (Intersection Observer) ──
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    fadeElements.forEach((el) => revealObserver.observe(el));
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-toggle').forEach((button) => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const chevron = button.querySelector('.faq-chevron');
+        const isOpen = answer.classList.contains('open');
+
+        // Close all others
+        document.querySelectorAll('.faq-answer.open').forEach((a) => {
+          a.classList.remove('open');
+          a.previousElementSibling.querySelector('.faq-chevron').style.transform = 'rotate(0deg)';
+          a.previousElementSibling.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          answer.classList.add('open');
+          chevron.style.transform = 'rotate(180deg)';
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
