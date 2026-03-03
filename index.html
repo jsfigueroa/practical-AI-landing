@@ -480,49 +480,140 @@
 
       <!-- Timeline -->
       <div class="mx-auto mt-16 max-w-2xl space-y-0">
-        <!-- Phase 1 -->
-        <div class="timeline-line fade-up relative pb-12 pl-16">
-          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">
-            1
-          </div>
+
+        <!-- Módulo 1 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">1</div>
           <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-600">Semanas 1–3</div>
-            <h3 class="mb-2 text-lg font-bold text-brand-950">Fundamentos y Prompts Avanzados</h3>
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">Estrategia y Propósito</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">El Radar de Ideas (Design Thinking + Ikigai)</h3>
             <p class="text-sm leading-relaxed text-slate-600">
-              Dejar de tratar a la IA como un buscador. Fundamentos y Prompts Avanzados para resultados profesionales.
+              "Bienvenidos a la era de los Creadores". Cruzar Pasiones (qué amo / qué hago en mi tiempo libre) con Problemas (qué me molesta / qué falta). Selección del proyecto y definición de la "Misión".
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-brand-700">Output: Definición del Proyecto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">2</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">Lógica para AI</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Domando a la Bestia (Fundamentos + Prompting)</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Cómo funcionan los LLMs (sin teoría aburrida). Ingeniería de Prompts aplicada: Chain of Thought y Contexto. Cómo pedirle a la IA que estructure el plan de trabajo de su idea específica.
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-brand-700">Output: Alcance del MVP e historias de usuario</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">3</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">Arquitectura de Datos (Supabase)</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">"Las Apps Comen Datos"</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Introducción a la lógica de tablas (sin SQL). Usar el LLM (Claude/GPT) para diseñar la base de datos del proyecto (Usuarios, Productos, Inventario). Creación de cuenta en Supabase.
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-brand-700">Output: DB funcional para el MVP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 4 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">4</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">De Texto a Software (Lovable)</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">"Hágase la App"</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Escribir el Mega-Prompt en Lovable para generar la UI. Conexión básica con Supabase.
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-brand-700">Output: Primera versión funcional en pantalla</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 5 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">5</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">Funcionalidad y Lógica (Lovable)</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Refinar la App</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Filtros y visualización de datos reales. Pulir la experiencia de usuario (UX).
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-brand-700">Output: App V1 publicada y lista para usar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 6 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">6</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">AI en la Experiencia de Usuario</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">No Solo Usar AI: Incluirla en tu Producto</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              <strong class="text-brand-950">Parte 1 — Creatividad visual y multimedia.</strong> La fábrica de assets: NanoBanana, Elevenlabs, Luma/Dream Machine.<br />
+              <strong class="text-brand-950">Parte 2 — Automatizando la magia.</strong> N8n para crear experiencias AI-first.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <div class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+                <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                <span class="text-xs font-semibold text-brand-700">Output: Identidad visual y sonora</span>
+              </div>
+              <div class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+                <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                <span class="text-xs font-semibold text-brand-700">Output: Flujos potenciados por AI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 7 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">7</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">Vibe Coding y Ajuste Fino (Cursor)</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Del Prompt al Código Limpio</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Usando Cursor Free: descarga del código para limpieza, optimización y potenciación con flujos de N8n.
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-brand-700">Output: App con flujos AI integrados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 8 -->
+        <div class="timeline-line fade-up relative pb-10 pl-16">
+          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">8</div>
+          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-brand-600">Lanzamiento al Mundo (Netlify)</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">Deploy + Beta Testing</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              <strong class="text-brand-950">Parte 1</strong> — Configuración de dominios y variables de entorno. Despliegue oficial en Netlify.<br />
+              <strong class="text-brand-950">Parte 2</strong> — Estrategia de Beta Testing: cómo recoger feedback real de los primeros usuarios para iterar.
             </p>
           </div>
         </div>
 
-        <!-- Phase 2 -->
-        <div class="timeline-line fade-up relative pb-12 pl-16">
-          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">
-            2
-          </div>
-          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-600">Semanas 4–6</div>
-            <h3 class="mb-2 text-lg font-bold text-brand-950">De la Idea al Plan Estructurado</h3>
-            <p class="text-sm leading-relaxed text-slate-600">
-              Usar IA para analizar, validar y diseñar la estructura de su proyecto real.
-            </p>
-          </div>
-        </div>
-
-        <!-- Phase 3 -->
-        <div class="timeline-line fade-up relative pb-12 pl-16">
-          <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-700/30">
-            3
-          </div>
-          <div class="rounded-xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-600">Semanas 7–9</div>
-            <h3 class="mb-2 text-lg font-bold text-brand-950">Creación Acelerada</h3>
-            <p class="text-sm leading-relaxed text-slate-600">
-              Generación de código, contenido, análisis y automatización para darle vida al proyecto.
-            </p>
-          </div>
-        </div>
-
-        <!-- Phase 4 -->
+        <!-- Módulo 9 (Final) -->
         <div class="fade-up relative pl-16">
           <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-white shadow-lg shadow-gold-500/30">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -530,13 +621,18 @@
             </svg>
           </div>
           <div class="rounded-xl border-2 border-gold-500/30 bg-amber-50/50 p-6 shadow-sm">
-            <div class="mb-2 text-xs font-semibold uppercase tracking-widest text-gold-600">Semanas 10–12</div>
-            <h3 class="mb-2 text-lg font-bold text-brand-950">Auditoría y Presentación Final</h3>
+            <div class="mb-1 text-xs font-semibold uppercase tracking-widest text-gold-600">Cómo Presentar y Vender tu Solución</div>
+            <h3 class="mb-2 text-lg font-bold text-brand-950">"Del Código al Cliente"</h3>
             <p class="text-sm leading-relaxed text-slate-600">
-              Cómo detectar errores de la IA (alucinaciones), uso ético de la tecnología y presentación final del proyecto.
+              Cómo construir un storytelling poderoso alrededor de tu solución IA. Estructura de un Pitch efectivo, modelos de monetización y cómo vender la eficiencia del sistema creado.
             </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1">
+              <svg class="h-3.5 w-3.5 text-gold-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              <span class="text-xs font-semibold text-gold-600">Output: Pitch + demostración final de la solución</span>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
